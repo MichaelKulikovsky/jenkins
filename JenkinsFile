@@ -28,14 +28,14 @@ pipeline {
       stage('Build image') {
         steps {
            echo "בונים Docker Image"
-           sh 'docker build -t jenkins:${BUILD_NUMBER} -t jenkins:latest .'
+           sh "docker build -t jenkins:${BUILD_NUMBER} -t jenkins:latest ."
         }
       }
 
       stage('Deploy') {
             steps {
-                echo 'מריצים את הגרסה החדשה על פורט 8001'
-                sh 'docker run -d --name filename-live-${BUILD_NUMBER} -p 3000:3000 jenkins:latest${BUILD_NUMBER}'
+                echo 'מריצים את הגרסה החדשה על פורט 3000'
+                sh "docker run -d --name filename-live-${BUILD_NUMBER} -p 3000:3000 jenkins:${BUILD_NUMBER}"
             }
       }
 
@@ -46,21 +46,3 @@ pipeline {
        failure { echo "משהו נכשל" }
     }
 }
-
-
-// node {
-//     checkout scm
-//     docker.image('mysql:8-oracle').withRun('-e "MYSQL_ROOT_PASSWORD=my-secret-pw"') { c ->
-//         docker.image('mysql:8-oracle').inside("--link ${c.id}:db") {
-//             /* Wait until mysql service is up */
-//             sh 'while ! mysqladmin ping -hdb --silent; do sleep 1; done'
-//         }
-//         docker.image('oraclelinux:9').inside("--link ${c.id}:db") {
-//             /*
-//              * Run some tests that require MySQL, and assume that it is
-//              * available on the host name `db`
-//              */
-//             sh 'make check'
-//         }
-//     }
-// }
