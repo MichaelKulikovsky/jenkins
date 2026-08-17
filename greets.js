@@ -16,7 +16,7 @@ const greets = [
 
   "Your future starts with what you do today.",
 
-  "You have abeautiful sole."
+  "You have beautiful sole."
 
 ];
 
