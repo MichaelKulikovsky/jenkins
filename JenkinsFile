@@ -35,10 +35,10 @@ pipeline {
       stage('Deploy') {
             steps {
                 echo 'מריצים את הגרסה החדשה על פורט 3000'
-                // 1. הסרת הקונטיינר הישן אם הוא קיים
+                //  הסרת הקונטיינר הישן אם הוא קיים
                 sh 'docker rm -f app-live || true'
 
-                // 2. הרצת השרות החדש עם שם קבוע
+                //  הרצת השרות החדש עם שם קבוע
                 sh "docker run -d --name app-live -p 3000:3000 jenkins:${BUILD_NUMBER}"
             }
       }
